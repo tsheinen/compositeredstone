@@ -26,7 +26,7 @@ object ModBlocks {
     @JvmStatic
     @SubscribeEvent
     fun registerItems(event: RegistryEvent.Register<Item>) {
-        event.registry.register(ItemBlock(blazeWire).setRegistryName(blazeWire?.registryName))
+        event.registry.register(ItemBlock(blazeWire).setRegistryName(blazeWire.registryName))
     }
 }
 

@@ -4,7 +4,6 @@ import net.minecraft.block.state.IBlockState
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase
-import net.minecraft.util.DamageSource
 import net.minecraft.util.EnumParticleTypes
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
@@ -12,6 +11,7 @@ import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import java.util.*
+import kotlin.math.max
 
 class BlockBlazeWire : BlockCompositeWire("blaze_wire") {
     override fun getColor(world: IBlockAccess?, state: IBlockState?, pos: BlockPos?, tint: Int): Int {
@@ -29,8 +29,8 @@ class BlockBlazeWire : BlockCompositeWire("blaze_wire") {
             val d2 = pos.z.toDouble() + 0.5 + (rand.nextFloat().toDouble() - 0.5) * 0.2
             val f = i.toFloat() / 15.0f
             val f1 = f * 0.6f + 0.4f
-            val f2 = Math.max(0.0f, f * f * 0.7f - 0.5f)
-            val f3 = Math.max(0.0f, f * f * 0.6f - 0.7f)
+            val f2 = max(0.0f, f * f * 0.7f - 0.5f)
+            val f3 = max(0.0f, f * f * 0.6f - 0.7f)
             val particle = if (rand.nextBoolean()) EnumParticleTypes.LAVA else EnumParticleTypes.REDSTONE
             worldIn.spawnParticle(particle, d0, d1, d2, f1.toDouble(), f2.toDouble(), f3.toDouble())
         }

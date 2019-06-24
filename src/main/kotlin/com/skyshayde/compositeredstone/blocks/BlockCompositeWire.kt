@@ -6,7 +6,6 @@ import net.minecraft.block.Block
 import net.minecraft.block.BlockObserver
 import net.minecraft.block.BlockRedstoneDiode
 import net.minecraft.block.BlockRedstoneRepeater
-import net.minecraft.block.properties.IProperty
 import net.minecraft.block.properties.PropertyInteger
 import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
@@ -15,7 +14,6 @@ import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.init.Blocks
 import net.minecraft.item.Item
 import net.minecraft.util.EnumFacing
-import net.minecraft.util.EnumParticleTypes
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
@@ -25,6 +23,8 @@ import net.minecraftforge.fml.relauncher.SideOnly
 import vazkii.arl.block.BlockModDust
 import java.awt.Color
 import java.util.*
+import kotlin.math.max
+import kotlin.math.min
 
 
 abstract class BlockCompositeWire(name: String) : BlockModDust(name) {
@@ -70,13 +70,13 @@ abstract class BlockCompositeWire(name: String) : BlockModDust(name) {
 
             val p = 2 * l - q
 
-            var r = Math.max(0f, HueToRGB(p, q, h + 1.0f / 3.0f))
-            var g = Math.max(0f, HueToRGB(p, q, h))
-            var b = Math.max(0f, HueToRGB(p, q, h - 1.0f / 3.0f))
+            var r = max(0f, HueToRGB(p, q, h + 1.0f / 3.0f))
+            var g = max(0f, HueToRGB(p, q, h))
+            var b = max(0f, HueToRGB(p, q, h - 1.0f / 3.0f))
 
-            r = Math.min(r, 1.0f)
-            g = Math.min(g, 1.0f)
-            b = Math.min(b, 1.0f)
+            r = min(r, 1.0f)
+            g = min(g, 1.0f)
+            b = min(b, 1.0f)
 
             return Color(r, g, b, alpha)
         }
@@ -115,7 +115,7 @@ abstract class BlockCompositeWire(name: String) : BlockModDust(name) {
     }
 
     override fun createBlockState(): BlockStateContainer {
-        return BlockStateContainer(this, *arrayOf<IProperty<*>>(NORTH, EAST, SOUTH, WEST, POWER))
+        return BlockStateContainer(this, NORTH, EAST, SOUTH, WEST, POWER)
     }
 
     override fun canConnectTo(blockState: IBlockState, side: EnumFacing?, world: IBlockAccess, pos: BlockPos): Boolean {
@@ -359,6 +359,6 @@ abstract class BlockCompositeWire(name: String) : BlockModDust(name) {
 
     @SideOnly(Side.CLIENT)
     fun initModel() {
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, ModelResourceLocation(registryName, "inventory"));
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, ModelResourceLocation(registryName, "inventory"))
     }
 }
