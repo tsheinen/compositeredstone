@@ -104,7 +104,7 @@ abstract class BlockCompositeWire(name: String) : BlockModDust(name) {
 
     init {
         defaultState = defaultState.withProperty(POWER, Integer.valueOf(0))
-        setCreativeTab(CreativeTabs.MISC)
+        setCreativeTab(CreativeTabs.REDSTONE)
     }
 
     abstract override fun getColor(world: IBlockAccess?, state: IBlockState?, pos: BlockPos?, tint: Int): Int
