@@ -186,7 +186,6 @@ abstract class BlockCompositeWire(name: String) : BlockModDust(name) {
     }
 
 
-
     override fun breakBlock(worldIn: World, pos: BlockPos, state: IBlockState) {
         super.breakBlock(worldIn, pos, state)
 
@@ -292,6 +291,10 @@ abstract class BlockCompositeWire(name: String) : BlockModDust(name) {
         return this.defaultState.withProperty(POWER, Integer.valueOf(meta)!!)
     }
 
+    override fun getMetaFromState(state: IBlockState): Int {
+        return state.getValue(POWER) as Int
+    }
+
     override fun getStrongPower(blockState: IBlockState, blockAccess: IBlockAccess, pos: BlockPos, side: EnumFacing): Int {
         return if (!this.canProvidePower) 0 else blockState.getWeakPower(blockAccess, pos, side)
     }
@@ -353,6 +356,7 @@ abstract class BlockCompositeWire(name: String) : BlockModDust(name) {
             }
         }
     }
+
     @SideOnly(Side.CLIENT)
     fun initModel() {
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, ModelResourceLocation(registryName, "inventory"));
