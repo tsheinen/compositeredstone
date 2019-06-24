@@ -1,0 +1,16 @@
+[
+{
+  "modid": "compositeredstone",
+  "name": "Composite Redstone",
+  "description": "Composite redstone dusts with various effects",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["skyshayde", "yrsegal"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
