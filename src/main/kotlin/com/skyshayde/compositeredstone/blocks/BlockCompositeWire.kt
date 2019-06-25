@@ -6,6 +6,7 @@ import net.minecraft.block.Block
 import net.minecraft.block.BlockObserver
 import net.minecraft.block.BlockRedstoneDiode
 import net.minecraft.block.BlockRedstoneRepeater
+import net.minecraft.block.material.Material
 import net.minecraft.block.properties.PropertyInteger
 import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
@@ -20,14 +21,13 @@ import net.minecraft.world.World
 import net.minecraftforge.client.model.ModelLoader
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
-import vazkii.arl.block.BlockModDust
 import java.awt.Color
 import java.util.*
 import kotlin.math.max
 import kotlin.math.min
 
 
-abstract class BlockCompositeWire(name: String) : BlockModDust(name) {
+abstract class BlockCompositeWire(name: String, material: Material) : BlockModDust(name, material) {
     private var canProvidePower = true
     /** List of blocks to update with redstone.  */
     private val blocksNeedingUpdate = Sets.newHashSet<BlockPos>()
@@ -134,7 +134,7 @@ abstract class BlockCompositeWire(name: String) : BlockModDust(name) {
         }
     }
 
-    private fun updateSurroundingRedstone(worldIn: World, pos: BlockPos, state: IBlockState): IBlockState {
+    fun updateSurroundingRedstone(worldIn: World, pos: BlockPos, state: IBlockState): IBlockState {
         var state = state
         state = this.calculateCurrentChanges(worldIn, pos, pos, state)
         val list = Lists.newArrayList(this.blocksNeedingUpdate)

@@ -1,5 +1,6 @@
 package com.skyshayde.compositeredstone.blocks
 
+import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.Entity
@@ -13,7 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly
 import java.util.*
 import kotlin.math.max
 
-class BlockBlazeWire : BlockCompositeWire("blaze_wire") {
+class BlockBlazeWire : BlockCompositeWire("blaze_wire", Material.CIRCUITS) {
     override fun getColor(world: IBlockAccess?, state: IBlockState?, pos: BlockPos?, tint: Int): Int {
         val power = state?.getValue(POWER) ?: 0
         return BlockCompositeWire.toRGB(33f, 100f, 30f + power * 2f, 1f).rgb

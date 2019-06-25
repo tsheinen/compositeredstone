@@ -10,9 +10,11 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 @Mod.EventBusSubscriber
 object ModBlocks {
     val blazeWire: Block
+    val sandWire: Block
 
     init {
         blazeWire = BlockBlazeWire()
+        sandWire = BlockSandWire()
 
     }
 
@@ -20,6 +22,7 @@ object ModBlocks {
     @SubscribeEvent
     fun registerBlocks(event: RegistryEvent.Register<Block>) {
         event.registry.register(blazeWire)
+        event.registry.register(sandWire)
     }
 
 
@@ -27,6 +30,7 @@ object ModBlocks {
     @SubscribeEvent
     fun registerItems(event: RegistryEvent.Register<Item>) {
         event.registry.register(ItemBlock(blazeWire).setRegistryName(blazeWire.registryName))
+        event.registry.register(ItemBlock(sandWire).setRegistryName(sandWire.registryName))
     }
 }
 
