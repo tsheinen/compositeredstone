@@ -2,3 +2,4 @@ tile.compositeredstone:blaze_wire.name=Blaze Wire
 tile.compositeredstone:sand_wire.name=Sand Wire
 tile.compositeredstone:lapis_wire.name=Lapis Wire
 tile.compositeredstone:glowstone_wire.name=Glowstone Wire
+tile.compositeredstone:gunpowder_wire.name=Gunpowder Wire

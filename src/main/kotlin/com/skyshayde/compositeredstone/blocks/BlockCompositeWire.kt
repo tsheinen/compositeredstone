@@ -29,10 +29,10 @@ import kotlin.math.min
 
 
 abstract class BlockCompositeWire(name: String, material: Material) : BlockModDust(name, material) {
-    private var canProvidePower = true
+    var canProvidePower = true
     open var powerDecreasedPerBlock = 1
     /** List of blocks to update with redstone.  */
-    private val blocksNeedingUpdate = Sets.newHashSet<BlockPos>()
+    val blocksNeedingUpdate = Sets.newHashSet<BlockPos>()
 
     companion object {
         val POWER: PropertyInteger = PropertyInteger.create("power", 0, 15)
@@ -292,7 +292,7 @@ abstract class BlockCompositeWire(name: String, material: Material) : BlockModDu
         return state
     }
 
-    private fun getMaxCurrentStrength(worldIn: World, pos: BlockPos, strength: Int): Int {
+    fun getMaxCurrentStrength(worldIn: World, pos: BlockPos, strength: Int): Int {
         if (worldIn.getBlockState(pos).block !== this) {
             return strength
         } else {

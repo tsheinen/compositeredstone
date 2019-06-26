@@ -13,12 +13,14 @@ object ModBlocks {
     val sandWire: Block
     val lapisWire: Block
     val glowstoneWire: Block
+    val gunpowderWire: Block
 
     init {
         blazeWire = BlockBlazeWire()
         sandWire = BlockSandWire()
         lapisWire = BlockLapisWire()
         glowstoneWire = BlockGlowstoneWire()
+        gunpowderWire = BlockGunpowderWire()
 
     }
 
@@ -29,6 +31,7 @@ object ModBlocks {
         event.registry.register(ItemBlock(sandWire).setRegistryName(sandWire.registryName))
         event.registry.register(ItemBlock(lapisWire).setRegistryName(lapisWire.registryName))
         event.registry.register(ItemBlock(glowstoneWire).setRegistryName(glowstoneWire.registryName))
+        event.registry.register(ItemBlock(gunpowderWire).setRegistryName(gunpowderWire.registryName))
     }
 }
 
