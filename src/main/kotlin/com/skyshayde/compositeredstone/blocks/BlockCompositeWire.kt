@@ -15,6 +15,7 @@ import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.init.Blocks
 import net.minecraft.item.Item
 import net.minecraft.util.EnumFacing
+import net.minecraft.util.EnumParticleTypes
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
@@ -29,6 +30,7 @@ import kotlin.math.min
 
 abstract class BlockCompositeWire(name: String, material: Material) : BlockModDust(name, material) {
     private var canProvidePower = true
+    open var powerDecreasedPerBlock = 1
     /** List of blocks to update with redstone.  */
     private val blocksNeedingUpdate = Sets.newHashSet<BlockPos>()
 
@@ -116,6 +118,22 @@ abstract class BlockCompositeWire(name: String, material: Material) : BlockModDu
 
     override fun createBlockState(): BlockStateContainer {
         return BlockStateContainer(this, NORTH, EAST, SOUTH, WEST, POWER)
+    }
+
+    @SideOnly(Side.CLIENT)
+    override fun randomDisplayTick(stateIn: IBlockState, worldIn: World, pos: BlockPos, rand: Random) {
+        val i = (stateIn.getValue(POWER) as Int).toInt()
+
+        if (i != 0 && rand.nextInt(3) == 0) {
+            val d0 = pos.x.toDouble() + 0.5 + (rand.nextFloat().toDouble() - 0.5) * 0.2
+            val d1 = (pos.y.toFloat() + 0.0625f).toDouble()
+            val d2 = pos.z.toDouble() + 0.5 + (rand.nextFloat().toDouble() - 0.5) * 0.2
+            val f = i.toFloat() / 15.0f
+            val f1 = f * 0.6f + 0.4f
+            val f2 = max(0.0f, f * f * 0.7f - 0.5f)
+            val f3 = max(0.0f, f * f * 0.6f - 0.7f)
+            worldIn.spawnParticle(EnumParticleTypes.REDSTONE, d0, d1, d2, f1.toDouble(), f2.toDouble(), f3.toDouble())
+        }
     }
 
     override fun canConnectTo(blockState: IBlockState, side: EnumFacing?, world: IBlockAccess, pos: BlockPos): Boolean {
@@ -246,7 +264,7 @@ abstract class BlockCompositeWire(name: String, material: Material) : BlockModDu
         }
 
         if (l > j) {
-            j = l - 1
+            j = l - powerDecreasedPerBlock
         } else if (j > 0) {
             --j
         } else {

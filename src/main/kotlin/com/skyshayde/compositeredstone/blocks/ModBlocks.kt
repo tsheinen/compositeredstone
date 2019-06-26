@@ -11,26 +11,21 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 object ModBlocks {
     val blazeWire: Block
     val sandWire: Block
+    val lapisWire: Block
 
     init {
         blazeWire = BlockBlazeWire()
         sandWire = BlockSandWire()
+        lapisWire = BlockLapisWire()
 
     }
-
-    @JvmStatic
-    @SubscribeEvent
-    fun registerBlocks(event: RegistryEvent.Register<Block>) {
-        event.registry.register(blazeWire)
-        event.registry.register(sandWire)
-    }
-
 
     @JvmStatic
     @SubscribeEvent
     fun registerItems(event: RegistryEvent.Register<Item>) {
         event.registry.register(ItemBlock(blazeWire).setRegistryName(blazeWire.registryName))
         event.registry.register(ItemBlock(sandWire).setRegistryName(sandWire.registryName))
+        event.registry.register(ItemBlock(lapisWire).setRegistryName(lapisWire.registryName))
     }
 }
 
