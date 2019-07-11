@@ -1,6 +1,5 @@
 package com.skyshayde.compositeredstone.blocks
 
-import com.google.common.collect.Lists
 import com.google.common.collect.Sets
 import net.minecraft.block.Block
 import net.minecraft.block.BlockObserver
@@ -32,7 +31,7 @@ abstract class BlockCompositeWire(name: String, material: Material) : BlockModDu
     var canProvidePower = true
     open var powerDecreasedPerBlock = 1
     /** List of blocks to update with redstone.  */
-    val blocksNeedingUpdate = Sets.newHashSet<BlockPos>()
+    val blocksNeedingUpdate = Sets.newHashSet<BlockPos>();
 
     companion object {
         val POWER: PropertyInteger = PropertyInteger.create("power", 0, 15)
@@ -152,10 +151,10 @@ abstract class BlockCompositeWire(name: String, material: Material) : BlockModDu
         }
     }
 
-    fun updateSurroundingRedstone(worldIn: World, pos: BlockPos, state: IBlockState): IBlockState {
+    open fun updateSurroundingRedstone(worldIn: World, pos: BlockPos, state: IBlockState): IBlockState {
         var state = state
         state = this.calculateCurrentChanges(worldIn, pos, pos, state)
-        val list = Lists.newArrayList(this.blocksNeedingUpdate)
+        val list = this.blocksNeedingUpdate.toList()
         this.blocksNeedingUpdate.clear()
 
         for (blockpos in list) {
@@ -230,7 +229,7 @@ abstract class BlockCompositeWire(name: String, material: Material) : BlockModDu
         }
     }
 
-    private fun calculateCurrentChanges(worldIn: World, pos1: BlockPos, pos2: BlockPos, state: IBlockState): IBlockState {
+    open fun calculateCurrentChanges(worldIn: World, pos1: BlockPos, pos2: BlockPos, state: IBlockState): IBlockState {
         var state = state
         val iblockstate = state
         val i = (state.getValue(POWER) as Int).toInt()
