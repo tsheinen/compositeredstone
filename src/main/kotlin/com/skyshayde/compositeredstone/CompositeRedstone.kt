@@ -19,11 +19,12 @@ object CompositeRedstone {
 
     const val MODID = "compositeredstone"
     const val MODNAME = "CompositeRedstone"
-    const val MAJOR = "GRADLE:VERSION"
-    const val MINOR = "GRADLE:BUILD"
-    const val VERSION = "$MAJOR.$MINOR"
+    const val MAJOR = "1"
+    const val MINOR = "0"
+    const val PATCH = "0"
+    const val VERSION = "$MAJOR.$MINOR.$PATCH"
     const val ALLOWED = "[1.12,)"
-    const val DEPENDENCIES = "required-after:forgelin@[1.8.0,);required-after:forge@[14.23.5.2768,)"
+    const val DEPENDENCIES = "required-after:forgelin@[1.8.0,);required-after:forge@[14.23.5.2768,);required-after:autoreglib@[1.3-27,)"
     const val ADAPTER = "net.shadowfacts.forgelin.KotlinAdapter"
 
     @Mod.EventHandler
